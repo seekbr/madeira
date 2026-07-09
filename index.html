@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Calculadora de Medidas</title>
+
+<style>
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 15px;
+    background: #f2f2f2;
+}
+
+.container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.coluna {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+fieldset {
+    margin: 5px;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.linha {
+    margin: 5px 0;
+}
+
+label {
+    display: inline-block;
+    width: 130px;
+}
+
+input {
+    width: 70px;
+}
+
+button {
+    margin-top: 15px;
+    padding: 10px 30px;
+    font-size: 16px;
+}
+
+#resultado {
+    white-space: pre;
+    font-family: monospace;
+    background: #111;
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="coluna">
+
+<fieldset>
+<legend>Escala</legend>
+
+<input id="escalaA" value="1">
+:
+<input id="escalaB" value="1">
+
+</fieldset>
+
+<fieldset>
+<legend>Formato</legend>
+
+<label>
+<input type="radio" name="formato" value="PI" checked>
+Perspectiva Isométrica
+</label>
+
+<br>
+
+<label>
+<input type="radio" name="formato" value="PO">
+Projeção Ortogonal
+</label>
+
+</fieldset>
+
+<fieldset>
+
+<legend>Peça</legend>
+
+<div class="linha">
+<label>Comprimento</label>
+<input id="comp" type="number">
+mm
+</div>
+
+<div class="linha">
+<label>Largura</label>
+<input id="larg" type="number">
+mm
+</div>
+
+<div class="linha">
+<label>Espessura</label>
+<input id="esp" type="number">
+mm
+</div>
+
+</fieldset>
+
+<fieldset>
+
+<legend>Folha</legend>
+
+<div class="linha">
+<label>Horizontal</label>
+<input id="hor" value="26.5">
+cm
+</div>
+
+<div class="linha">
+<label>Vertical</label>
+<input id="ver" value="17.5">
+cm
+</div>
+
+<div class="linha">
+<label>Margem</label>
+<input id="marg" value="1">
+cm
+</div>
+
+</fieldset>
+
+<button onclick="calcular()">
+Calcular
+</button>
+
+</div>
+
+<div class="coluna">
+
+<img src="legenda.png">
+
+<pre id="resultado"></pre>
+
+</div>
+
+</div>
+
+<script>
+
+
+function r(numero){
+
+    return numero.toFixed(2).padStart(5," ");
+}
+
+
+function calcular(){
+
+let escalaA =
+Number(document.getElementById("escalaA").value);
+
+let escalaB =
+Number(document.getElementById("escalaB").value);
+
+
+let escala = escalaA / escalaB;
+
+
+let comprimento =
+Number(document.getElementById("comp").value)
+* escala / 10;
+
+
+let largura =
+Number(document.getElementById("larg").value)
+* escala / 10;
+
+
+let espessura =
+Number(document.getElementById("esp").value)
+* escala / 10;
+
+
+let horizontal =
+Number(document.getElementById("hor").value);
+
+
+let vertical =
+Number(document.getElementById("ver").value);
+
+
+let margem =
+Number(document.getElementById("marg").value);
+
+
+
+let formato =
+document.querySelector(
+'input[name="formato"]:checked'
+).value;
+
+
+let linhas=[];
+
+
+
+if(formato=="PO"){
+
+
+linhas=[
+["C",comprimento],
+["L",largura],
+["E",espessura],
+["a",(horizontal-largura-margem-comprimento)/2],
+["b",(vertical-espessura-margem-comprimento)/2]
+];
+
+
+}
+
+
+
+else{
+
+
+let w=0.87*comprimento;
+let t=0.87*largura;
+let u=0.50*comprimento;
+let v=0.50*largura;
+
+
+linhas=[
+["C",comprimento],
+["L",largura],
+["E",espessura],
+["w",w],
+["t",t],
+["u",u],
+["v",v],
+["a",(horizontal-w-t)/2],
+["b",(vertical-u-espessura-v)/2]
+];
+
+
+}
+
+
+
+let texto =
+"╔══════════════════════╗\n";
+
+
+texto +=
+(formato=="PI"
+?"PERSPECTIVA ISOMÉTRICA"
+:"PROJEÇÃO ORTOGONAL")
++"\n";
+
+
+texto +=
+"╚══════════════════════╝\n\n";
+
+
+texto +=
+"Medida       Valor\n";
+
+texto +=
+"────────────────────\n";
+
+
+for(let l of linhas){
+
+texto +=
+l[0].padEnd(8)
++r(l[1]).padStart(8)
++" cm\n";
+
+}
+
+
+document.getElementById("resultado").textContent=
+texto;
+
+
+}
+
+
+</script>
+
+</body>
+</html>
