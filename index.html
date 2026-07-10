@@ -53,17 +53,25 @@ button {
     font-size: 16px;
 }
 
-#resultado {
-    white-space: pre;
-    font-family: monospace;
-    background: #111;
-    color: white;
-    padding: 15px;
-    border-radius: 8px;
+.saida{
+    display:flex;
+    gap:20px;
+    align-items:flex-start;
+    flex-wrap:wrap;
+}
+
+#resultado{
+    white-space:pre;
+    font-family:Consolas, monospace;
+    background:#111;
+    color:white;
+    padding:15px;
+    border-radius:8px;
 }
 
 img {
-    max-width: 100%;
+    max-width: 350px;
+    width: 100%;
     height: auto;
 }
 
@@ -159,9 +167,13 @@ Calcular
 
 <div class="coluna">
 
-<img src="legenda.png">
+<div class="saida">
 
 <pre id="resultado"></pre>
+
+<img src="legenda.png">
+
+</div>
 
 </div>
 
