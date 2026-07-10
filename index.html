@@ -82,12 +82,17 @@ button {
 }
 
 #resultado{
-    white-space:pre;
-    font-family:Consolas, monospace;
-    background:#111;
-    color:white;
-    padding:15px;
-    border-radius:8px;
+    white-space: pre;
+    font-family: Consolas, monospace;
+    background: #111;
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-sizing: border-box;
+    overflow: auto;
+    width: 100%;
+    max-width: 320px;
+    height: 260px;
 }
 
 img {
@@ -162,7 +167,7 @@ mm
 
 <div class="linha">
 <label>Horizontal</label>
-<input id="hor" value="26.5">
+<input id="hor" value="26.6">
 cm
 </div>
 
