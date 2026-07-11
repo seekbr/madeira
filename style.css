@@ -1,0 +1,135 @@
+*{
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Segoe UI, Arial, sans-serif;
+    margin:0;
+    padding:25px;
+    background:#eef2f7;
+    color:#2c3e50;
+}
+
+.container{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+.coluna{
+    background:white;
+    border-radius:16px;
+    padding:20px;
+    box-shadow:0 8px 24px rgba(0,0,0,.08);
+}
+
+fieldset{
+    border:1px solid #d7dde8;
+    border-radius:12px;
+    padding:15px;
+    margin-bottom:15px;
+}
+
+legend{
+    padding:0 8px;
+    font-weight:600;
+    color:#2563eb;
+}
+
+.linha{
+    display:flex;
+    align-items:center;
+    margin:10px 0;
+}
+
+label{
+    width:130px;
+}
+
+input{
+    width:80px;
+    padding:6px 8px;
+    border:1px solid #cbd5e1;
+    border-radius:8px;
+    font-size:15px;
+    transition:.2s;
+}
+
+input:focus{
+    outline:none;
+    border-color:#2563eb;
+    box-shadow:0 0 0 3px rgba(37,99,235,.15);
+}
+
+button{
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    border:none;
+    border-radius:10px;
+    background:#2563eb;
+    color:white;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.2s;
+}
+
+button:hover{
+    background:#1d4ed8;
+    transform:translateY(-1px);
+}
+
+button:active{
+    transform:translateY(1px);
+}
+
+.saida{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+#resultado{
+    white-space:pre;
+    font-family:Consolas, monospace;
+    background:#1e293b;
+    color:#f8fafc;
+    padding:18px;
+    border-radius:12px;
+    width:100%;
+    max-width:290px;
+    height:320px;
+    overflow:auto;
+    border:2px solid #334155;
+    box-shadow:0 6px 18px rgba(0,0,0,.15);
+}
+
+img{
+    width:100%;
+    max-width:600px;
+    border-radius:12px;
+    border:1px solid #d7dde8;
+    box-shadow:0 6px 18px rgba(0,0,0,.08);
+}
+
+@media (min-width:900px){
+
+    .container{
+        flex-direction:row;
+        align-items:flex-start;
+    }
+
+    .coluna:first-child{
+        width:360px;
+        flex-shrink:0;
+    }
+
+    .coluna:last-child{
+        flex:1;
+    }
+
+    .saida{
+        align-items:flex-start;
+    }
+}
